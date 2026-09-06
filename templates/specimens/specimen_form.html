@@ -1,0 +1,142 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{% if specimen %}تعديل{% else %}إضافة{% endif %} عينة - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-vial text-success"></i> {% if specimen %}تعديل{% else %}إضافة{% endif %} عينة</h2>
+    <hr>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <!-- المعرفات -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">معرف العينة</label>
+            {{ form.specimen_id }}
+            <small class="text-muted">اتركه فارغاً لإنشاء معرف تلقائي</small>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الباركود</label>
+            {{ form.barcode }}
+        </div>
+        
+        <!-- النوع والمشارك -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">نوع العينة *</label>
+            {{ form.specimen_type }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المشارك *</label>
+            {{ form.participant }}
+        </div>
+        
+        <!-- الدراسة والزيارة -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الدراسة</label>
+            {{ form.study }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الزيارة</label>
+            {{ form.visit }}
+        </div>
+        
+        <!-- البروتوكول والعينة الأم -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">بروتوكول الجمع</label>
+            {{ form.collection_protocol }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">العينة الأم</label>
+            {{ form.parent_specimen }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <div class="form-check">
+                {{ form.is_primary }}
+                <label class="form-check-label" for="{{ form.is_primary.id_for_label }}">
+                    عينة أولية (غير مشتقة من عينة أخرى)
+                </label>
+            </div>
+        </div>
+        
+        <!-- الكمية والتركيز -->
+        <div class="col-md-4 mb-3">
+            <label class="form-label">الكمية *</label>
+            {{ form.quantity }}
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">وحدة الكمية *</label>
+            {{ form.quantity_unit }}
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">التركيز</label>
+            {{ form.concentration }}
+        </div>
+        
+        <!-- تاريخ الجمع -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ الجمع *</label>
+            {{ form.collection_date }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">حاوية الجمع</label>
+            {{ form.collection_container }}
+        </div>
+        
+        <!-- الجودة والحالة -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الجودة</label>
+            {{ form.quality }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة</label>
+            {{ form.status }}
+        </div>
+     
+<div class="col-md-6 mb-3">
+    <label class="form-label">عدد دورات التجميد والذوبان</label>
+    {{ form.freeze_thaw_cycles }}
+    <small class="text-muted">اتركه 0 إذا لم يتم تجميده من قبل</small>
+</div>
+   
+        <!-- موقع التخزين -->
+        <div class="col-md-6 mb-3">
+            <label class="form-label">موقع التخزين</label>
+            {{ form.storage_location }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ التخزين</label>
+            {{ form.storage_date }}
+        </div>
+        
+        <!-- ملاحظات -->
+        <div class="col-md-12 mb-3">
+            <label class="form-label">ملاحظات الجمع</label>
+            {{ form.collection_notes }}
+        </div>
+        
+        <div class="col-md-12 mb-3">
+            <label class="form-label">ملاحظات الجودة</label>
+            {{ form.quality_notes }}
+        </div>
+        
+        <div class="col-md-12 mb-3">
+            <label class="form-label">ملاحظات الحالة</label>
+            {{ form.status_notes }}
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'specimen_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

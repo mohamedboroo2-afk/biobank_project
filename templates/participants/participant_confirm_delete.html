@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}حذف مشارك - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-trash text-danger"></i> حذف مشارك</h2>
+    <hr>
+</div>
+
+<div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle"></i>
+    هل أنت متأكد من حذف المشارك <strong>{{ participant.full_name }}</strong>؟
+    <br>
+    <small>المعرف: {{ participant.participant_id }} | البريد الإلكتروني: {{ participant.email|default:"-" }}</small>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>الاسم الكامل:</strong> {{ participant.full_name }}</p>
+        <p><strong>المعرف:</strong> {{ participant.participant_id }}</p>
+        <p><strong>الجنس:</strong> {{ participant.get_gender_display }}</p>
+        <p><strong>العمر:</strong> {{ participant.age }} سنة</p>
+        <p><strong>رقم الهاتف:</strong> {{ participant.phone|default:"-" }}</p>
+        <p><strong>البريد الإلكتروني:</strong> {{ participant.email|default:"-" }}</p>
+        <p><strong>عدد العينات:</strong> {{ participant.specimens.count }}</p>
+    </div>
+</div>
+
+<div class="alert alert-warning">
+    <i class="fas fa-info-circle"></i>
+    <strong>تنبيه:</strong> سيتم حذف جميع البيانات المرتبطة بهذا المشارك بما في ذلك العينات والزيارات.
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash"></i> تأكيد الحذف
+    </button>
+    <a href="{% url 'participant_list' %}" class="btn btn-secondary">
+        <i class="fas fa-times"></i> إلغاء
+    </a>
+</form>
+{% endblock %}

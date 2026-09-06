@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{% if participant %}تعديل{% else %}إضافة{% endif %} مشارك - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-user text-primary"></i> {% if participant %}تعديل{% else %}إضافة{% endif %} مشارك</h2>
+    <hr>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">معرف المشارك *</label>
+            {{ form.participant_id }}
+            <small class="text-muted">مثال: P-001</small>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الرقم الوطني</label>
+            {{ form.national_id }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم الأول *</label>
+            {{ form.first_name }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم الأخير *</label>
+            {{ form.last_name }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ الميلاد *</label>
+            {{ form.date_of_birth }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الجنس *</label>
+            {{ form.gender }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة الاجتماعية</label>
+            {{ form.marital_status }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة الحيوية</label>
+            {{ form.vital_status }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الهاتف</label>
+            {{ form.phone }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">البريد الإلكتروني</label>
+            {{ form.email }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">العنوان</label>
+            {{ form.address }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المدينة</label>
+            {{ form.city }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الدولة</label>
+            {{ form.country }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">التشخيص</label>
+            {{ form.diagnosis }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">ملاحظات سريرية</label>
+            {{ form.clinical_notes }}
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'participant_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}إضافة مرفق تخزين - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-warehouse text-info"></i> إضافة مرفق تخزين جديد</h2>
+    <hr>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الرمز *</label>
+            {{ form.code }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم *</label>
+            {{ form.name }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">العنوان</label>
+            {{ form.address }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">جهة الاتصال</label>
+            {{ form.contact_person }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الهاتف</label>
+            {{ form.contact_phone }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="form-check">
+                {{ form.is_active }}
+                <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                    نشط
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-info">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'storage_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

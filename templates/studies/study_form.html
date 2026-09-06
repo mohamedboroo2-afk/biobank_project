@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}إضافة دراسة - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-book text-warning"></i> إضافة دراسة جديدة</h2>
+    <hr>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">معرف الدراسة *</label>
+            {{ form.study_id }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">العنوان المختصر *</label>
+            {{ form.short_title }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">العنوان الكامل *</label>
+            {{ form.title }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">الوصف</label>
+            {{ form.description }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">نوع الدراسة *</label>
+            {{ form.study_type }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة *</label>
+            {{ form.status }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الباحث الرئيسي</label>
+            {{ form.principal_investigator }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">مصدر التمويل</label>
+            {{ form.funding_source }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ البداية *</label>
+            {{ form.start_date }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ النهاية</label>
+            {{ form.end_date }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الموافقة الأخلاقية</label>
+            {{ form.ethical_approval_number }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ الموافقة الأخلاقية</label>
+            {{ form.ethical_approval_date }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">جهة الموافقة الأخلاقية</label>
+            {{ form.ethical_approval_body }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">رقم المنحة</label>
+            {{ form.funding_grant_number }}
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-warning">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'study_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

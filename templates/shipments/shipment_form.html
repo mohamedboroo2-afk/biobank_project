@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{% if shipment %}تعديل{% else %}إضافة{% endif %} شحنة - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-truck text-primary"></i> {% if shipment %}تعديل{% else %}إضافة{% endif %} شحنة</h2>
+    <hr>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <!-- معلومات الشحنة -->
+        <div class="col-12">
+            <h5 class="text-primary mb-3"><i class="fas fa-info-circle"></i> معلومات الشحنة</h5>
+            <hr>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">معرف الشحنة *</label>
+            {{ form.shipment_id }}
+            <small class="text-muted">مثال: SH-2024-001</small>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم التتبع</label>
+            {{ form.tracking_number }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ الشحن *</label>
+            {{ form.shipment_date }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تاريخ التسليم المتوقع</label>
+            {{ form.expected_delivery_date }}
+        </div>
+        
+        <!-- معلومات المرسل -->
+        <div class="col-12">
+            <h5 class="text-success mb-3"><i class="fas fa-paper-plane"></i> معلومات المرسل</h5>
+            <hr>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المرسل *</label>
+            {{ form.sender }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المؤسسة المرسلة *</label>
+            {{ form.sender_institution }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">عنوان المرسل *</label>
+            {{ form.sender_address }}
+        </div>
+        
+        <!-- معلومات المستلم -->
+        <div class="col-12">
+            <h5 class="text-warning mb-3"><i class="fas fa-arrow-down"></i> معلومات المستلم</h5>
+            <hr>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المستلم *</label>
+            {{ form.receiver }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المؤسسة المستلمة *</label>
+            {{ form.receiver_institution }}
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">عنوان المستلم *</label>
+            {{ form.receiver_address }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">جهة الاتصال *</label>
+            {{ form.receiver_contact }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الهاتف *</label>
+            {{ form.receiver_phone }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">البريد الإلكتروني</label>
+            {{ form.receiver_email }}
+        </div>
+        
+        <!-- تفاصيل الشحن -->
+        <div class="col-12">
+            <h5 class="text-info mb-3"><i class="fas fa-cog"></i> تفاصيل الشحن</h5>
+            <hr>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">طريقة الشحن *</label>
+            {{ form.shipping_method }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">متطلبات درجة الحرارة *</label>
+            {{ form.temperature_requirements }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم بوليصة الشحن</label>
+            {{ form.waybill_number }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رابط التتبع</label>
+            {{ form.tracking_url }}
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة</label>
+            {{ form.status }}
+        </div>
+        
+        <div class="col-12 mb-3">
+            <label class="form-label">ملاحظات</label>
+            {{ form.notes }}
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'shipment_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

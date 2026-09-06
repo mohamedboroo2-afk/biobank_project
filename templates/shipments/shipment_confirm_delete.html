@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}حذف شحنة - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-trash text-danger"></i> حذف الشحنة</h2>
+    <hr>
+</div>
+
+<div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle"></i>
+    هل أنت متأكد من حذف الشحنة <strong>{{ shipment.shipment_id }}</strong>؟
+    <br>
+    <small>المرسل: {{ shipment.sender_institution }} | المستلم: {{ shipment.receiver_institution }}</small>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>المعرف:</strong> {{ shipment.shipment_id }}</p>
+        <p><strong>رقم التتبع:</strong> {{ shipment.tracking_number|default:"-" }}</p>
+        <p><strong>المرسل:</strong> {{ shipment.sender_institution }}</p>
+        <p><strong>المستلم:</strong> {{ shipment.receiver_institution }}</p>
+        <p><strong>الحالة:</strong> {{ shipment.get_status_display }}</p>
+        <p><strong>تاريخ الشحن:</strong> {{ shipment.shipment_date|date:"Y-m-d H:i" }}</p>
+    </div>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash"></i> تأكيد الحذف
+    </button>
+    <a href="{% url 'shipment_list' %}" class="btn btn-secondary">
+        <i class="fas fa-times"></i> إلغاء
+    </a>
+</form>
+{% endblock %}

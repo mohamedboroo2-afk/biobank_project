@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}التقارير - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-file-alt text-primary"></i> التقارير والإحصائيات</h2>
+    <hr>
+</div>
+
+<!-- إحصائيات عامة -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card-stats primary">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="number">{{ total_participants }}</span>
+                    <span class="label">المشاركين</span>
+                </div>
+                <div class="icon"><i class="fas fa-users"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-stats success">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="number">{{ total_specimens }}</span>
+                    <span class="label">العينات</span>
+                </div>
+                <div class="icon"><i class="fas fa-flask"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-stats warning">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="number">{{ total_studies }}</span>
+                    <span class="label">الدراسات</span>
+                </div>
+                <div class="icon"><i class="fas fa-book"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-stats info">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="number">{{ total_shipments }}</span>
+                    <span class="label">الشحنات</span>
+                </div>
+                <div class="icon"><i class="fas fa-truck"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- تقارير مفصلة -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5><i class="fas fa-flask"></i> العينات حسب النوع</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for item in specimens_by_type %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item.specimen_type__name|default:"غير محدد" }}
+                        <span class="badge bg-primary rounded-pill">{{ item.count }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center">لا توجد بيانات</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5><i class="fas fa-chart-pie"></i> العينات حسب الحالة</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for item in specimens_by_status %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item.get_status_display|default:item.status }}
+                        <span class="badge bg-success rounded-pill">{{ item.count }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center">لا توجد بيانات</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5><i class="fas fa-venus-mars"></i> المشاركين حسب الجنس</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for item in participants_by_gender %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item.get_gender_display|default:item.gender }}
+                        <span class="badge bg-info rounded-pill">{{ item.count }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center">لا توجد بيانات</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

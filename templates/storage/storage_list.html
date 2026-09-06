@@ -1,0 +1,63 @@
+ 
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}مرافق التخزين - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-boxes text-info"></i> مرافق التخزين</h2>
+<a href="{% url 'facility_create' %}" class="btn btn-info">
+    <i class="fas fa-plus"></i> إضافة مرفق
+</a>
+</div>
+
+<div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> 
+    تم تسجيل {{ facilities|length }} مرفق تخزين في النظام.
+</div>
+
+<div class="table-responsive">
+    <table class="table table-custom table-hover">
+        <thead>
+            <tr>
+                <th>الرمز</th>
+                <th>الاسم</th>
+                <th>العنوان</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for facility in facilities %}
+            <tr>
+                <td><strong>{{ facility.code }}</strong></td>
+                <td>{{ facility.name }}</td>
+                <td>{{ facility.address|truncatechars:50 }}</td>
+                <td>
+                    <span class="badge-status {% if facility.is_active %}active{% else %}inactive{% endif %}">
+                        {{ facility.is_active|yesno:"نشط,غير نشط" }}
+                    </span>
+                </td>
+<td>
+    <a href="{% url 'facility_edit' facility.pk %}" class="btn btn-sm btn-warning">
+        <i class="fas fa-edit"></i>
+    </a>
+    <a href="{% url 'facility_delete' facility.pk %}" class="btn btn-sm btn-danger">
+        <i class="fas fa-trash"></i>
+    </a>
+</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> لا توجد مرافق تخزين مسجلة
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

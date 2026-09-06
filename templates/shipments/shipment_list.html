@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}الشحنات - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-truck text-primary"></i> الشحنات</h2>
+    <a href="{% url 'shipment_create' %}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> إضافة شحنة
+    </a>
+</div>
+
+<!-- عرض رسائل الخطأ -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- Search -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="get" class="d-flex">
+            <input type="text" name="q" class="form-control me-2" placeholder="بحث عن شحنة..." value="{{ query }}">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-custom table-hover">
+        <thead>
+            <tr>
+                <th>المعرف</th>
+                <th>رقم التتبع</th>
+                <th>المرسل</th>
+                <th>المستلم</th>
+                <th>طريقة الشحن</th>
+                <th>الحالة</th>
+                <th>تاريخ الشحن</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipment in page_obj %}
+            <tr>
+                <td><strong>{{ shipment.shipment_id }}</strong></td>
+                <td>{{ shipment.tracking_number|default:"-" }}</td>
+                <td>{{ shipment.sender_institution|truncatechars:15 }}</td>
+                <td>{{ shipment.receiver_institution|truncatechars:15 }}</td>
+                <td>{{ shipment.get_shipping_method_display }}</td>
+                <td>
+                    <span class="badge-status {% if shipment.status == 'DELIVERED' %}active{% elif shipment.status == 'SHIPPED' %}pending{% else %}inactive{% endif %}">
+                        {{ shipment.get_status_display }}
+                    </span>
+                </td>
+                <td>{{ shipment.shipment_date|date:"Y-m-d" }}</td>
+                <td>
+                    <a href="{% url 'shipment_detail' shipment.pk %}" class="btn btn-sm btn-info">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{% url 'shipment_edit' shipment.pk %}" class="btn btn-sm btn-warning">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'shipment_delete' shipment.pk %}" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> لا توجد شحنات مسجلة
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">السابق</a>
+        </li>
+        {% endif %}
+        
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">التالي</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

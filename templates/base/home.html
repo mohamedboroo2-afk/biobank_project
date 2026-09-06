@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة البنك الحيوي</title>
+    
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-dna me-2"></i>نظام البنك الحيوي
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">
+                            <i class="fas fa-home"></i> الرئيسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">
+                            <i class="fas fa-cog"></i> الإدارة
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/login/">
+                            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h5 class="text-center mb-3">
+                        <i class="fas fa-bars"></i> القائمة
+                    </h5>
+                    <hr>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="/">
+                            <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                        </a>
+                        <a class="nav-link" href="/admin/participants/participant/">
+                            <i class="fas fa-users"></i> المشاركين
+                        </a>
+                        <a class="nav-link" href="/admin/specimens/specimen/">
+                            <i class="fas fa-flask"></i> العينات
+                        </a>
+                        <a class="nav-link" href="/admin/storage/facility/">
+                            <i class="fas fa-boxes"></i> التخزين
+                        </a>
+                        <a class="nav-link" href="/admin/studies/study/">
+                            <i class="fas fa-book"></i> الدراسات
+                        </a>
+                        <a class="nav-link" href="/admin/shipments/shipment/">
+                            <i class="fas fa-truck"></i> الشحن
+                        </a>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-file-alt"></i> التقارير
+                        </a>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-history"></i> سجل التدقيق
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="col-md-9">
+                <div class="main-content">
+                    <!-- Header -->
+                    <div class="text-center mb-4 animate-fade-in">
+                        <h1 class="display-4">
+                            <i class="fas fa-dna text-primary"></i> نظام إدارة البنك الحيوي
+                        </h1>
+                        <p class="lead text-muted">Biobank Management System</p>
+                        <hr>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3 animate-fade-in-delay-1">
+                            <div class="card-stats primary">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="number">0</span>
+                                        <span class="label">المشاركين</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate-fade-in-delay-1">
+                            <div class="card-stats success">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="number">0</span>
+                                        <span class="label">العينات</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate-fade-in-delay-2">
+                            <div class="card-stats warning">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="number">0</span>
+                                        <span class="label">الدراسات</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate-fade-in-delay-2">
+                            <div class="card-stats info">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="number">0</span>
+                                        <span class="label">الشحنات</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <h5><i class="fas fa-bolt text-warning"></i> إجراءات سريعة</h5>
+                            <hr>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/admin/apps/participants/participant/add/" class="btn btn-primary w-100">
+                                <i class="fas fa-user-plus"></i> إضافة مشارك
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/admin/apps/specimens/specimen/add/" class="btn btn-success w-100">
+                                <i class="fas fa-vial"></i> إضافة عينة
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/admin/" class="btn btn-info w-100 text-white">
+                                <i class="fas fa-search"></i> بحث عن عينة
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-warning w-100">
+                                <i class="fas fa-file-export"></i> تصدير تقرير
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5><i class="fas fa-history"></i> آخر النشاطات</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        لا توجد نشاطات حديثة. ابدأ بإضافة بياناتك الأولى!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-dna me-2"></i>
+                نظام إدارة البنك الحيوي &copy; 2026
+                <span class="mx-3">|</span>
+                الإصدار 1.0
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</body>
+</html>

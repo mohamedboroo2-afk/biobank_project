@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}حذف عينة - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-trash text-danger"></i> حذف العينة</h2>
+    <hr>
+</div>
+
+<div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle"></i>
+    هل أنت متأكد من حذف العينة <strong>{{ specimen.specimen_id }}</strong>؟
+    <br>
+    <small>النوع: {{ specimen.specimen_type.name }} | المشارك: {{ specimen.participant.full_name }}</small>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash"></i> تأكيد الحذف
+    </button>
+    <a href="{% url 'specimen_detail' specimen.pk %}" class="btn btn-secondary">
+        <i class="fas fa-times"></i> إلغاء
+    </a>
+</form>
+{% endblock %}

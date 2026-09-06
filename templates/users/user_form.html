@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{% if user_obj %}تعديل{% else %}إضافة{% endif %} مستخدم - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h2><i class="fas fa-user-plus text-primary"></i> {% if user_obj %}تعديل{% else %}إضافة{% endif %} مستخدم</h2>
+    <hr>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">البريد الإلكتروني *</label>
+            {{ form.email }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الدور *</label>
+            {{ form.role }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم الأول</label>
+            {{ form.first_name }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم الأخير</label>
+            {{ form.last_name }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">القسم</label>
+            {{ form.department }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المؤسسة</label>
+            {{ form.institution }}
+        </div>
+        
+        {% if not user_obj %}
+        <div class="col-md-6 mb-3">
+            <label class="form-label">كلمة المرور *</label>
+            {{ form.password1 }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">تأكيد كلمة المرور *</label>
+            {{ form.password2 }}
+        </div>
+        {% else %}
+        <div class="col-md-6 mb-3">
+            <div class="form-check">
+                {{ form.is_active }}
+                <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                    المستخدم نشط
+                </label>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> حفظ
+        </button>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> إلغاء
+        </a>
+    </div>
+</form>
+{% endblock %}

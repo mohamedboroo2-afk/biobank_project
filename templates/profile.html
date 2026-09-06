@@ -1,0 +1,58 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}الملف الشخصي - نظام البنك الحيوي{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h2><i class="fas fa-user-circle text-primary"></i> الملف الشخصي</h2>
+    <hr>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <i class="fas fa-user-circle" style="font-size: 100px; color: #4A6CF7;"></i>
+                <h4 class="mt-3">{{ user.get_full_name|default:user.email }}</h4>
+                <p class="text-muted">{{ user.email }}</p>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 30%;">البريد الإلكتروني</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>الاسم الأول</th>
+                        <td>{{ user.first_name|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <th>الاسم الأخير</th>
+                        <td>{{ user.last_name|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <th>الدور</th>
+                        <td>{{ user.get_role_display|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <th>القسم</th>
+                        <td>{{ user.department|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <th>المؤسسة</th>
+                        <td>{{ user.institution|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <th>تاريخ الانضمام</th>
+                        <td>{{ user.date_joined|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                </table>
+                <a href="{% url 'account_logout' %}" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

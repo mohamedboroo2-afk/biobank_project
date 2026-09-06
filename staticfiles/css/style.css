@@ -1,0 +1,327 @@
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+/* ===== Root Variables ===== */
+:root {
+    --primary-color: #4A6CF7;
+    --primary-dark: #3A56D4;
+    --secondary-color: #6C3CE1;
+    --success-color: #10B981;
+    --danger-color: #EF4444;
+    --warning-color: #F59E0B;
+    --info-color: #3B82F6;
+    --dark-color: #1E293B;
+    --light-color: #F8FAFC;
+    --gray-color: #94A3B8;
+    --white: #FFFFFF;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* ===== Reset & Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--light-color);
+    color: var(--dark-color);
+    direction: rtl;
+    min-height: 100vh;
+}
+
+/* ===== Navbar ===== */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    box-shadow: 0 4px 20px rgba(74, 108, 247, 0.35);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--white) !important;
+}
+
+.navbar-custom .navbar-brand i {
+    font-size: 1.6rem;
+}
+
+.navbar-custom .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.navbar-custom .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white) !important;
+    transform: translateY(-1px);
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 0;
+    min-height: calc(100vh - 100px);
+    position: sticky;
+    top: 90px;
+}
+
+.sidebar .nav-link {
+    color: var(--dark-color);
+    padding: 12px 20px;
+    border-radius: 0;
+    border-right: 3px solid transparent;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(74, 108, 247, 0.08);
+    border-right-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(135deg, rgba(74, 108, 247, 0.12), rgba(108, 60, 225, 0.12));
+    border-right-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sidebar .nav-link i {
+    margin-left: 12px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar .nav-link .badge {
+    float: left;
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    min-height: calc(100vh - 100px);
+}
+
+/* ===== Stats Cards ===== */
+.card-stats {
+    border: none;
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    color: var(--white);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-stats::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.card-stats:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-stats:hover::before {
+    transform: scale(0.8);
+}
+
+.card-stats .icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+}
+
+.card-stats .number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.card-stats .label {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* ===== Cards Colors ===== */
+.card-stats.primary {
+    background: linear-gradient(135deg, #4A6CF7, #6C3CE1);
+}
+
+.card-stats.success {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.card-stats.warning {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.card-stats.danger {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.card-stats.info {
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+}
+
+.card-stats.pink {
+    background: linear-gradient(135deg, #EC4899, #DB2777);
+}
+
+/* ===== Buttons ===== */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(74, 108, 247, 0.35);
+    color: var(--white);
+}
+
+/* ===== Tables ===== */
+.table-custom {
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.table-custom thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+}
+
+.table-custom tbody tr {
+    transition: var(--transition);
+}
+
+.table-custom tbody tr:hover {
+    background: rgba(74, 108, 247, 0.04);
+}
+
+/* ===== Badges ===== */
+.badge-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.badge-status.active {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.badge-status.inactive {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.badge-status.pending {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+/* ===== Footer ===== */
+.footer-custom {
+    background: linear-gradient(135deg, var(--dark-color), #0F172A);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px 0;
+    margin-top: 30px;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.footer-custom a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: var(--transition);
+}
+
+.footer-custom a:hover {
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fade-in-delay-1 {
+    animation: fadeInUp 0.6s ease 0.1s forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+    animation: fadeInUp 0.6s ease 0.2s forwards;
+    opacity: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+        margin-bottom: 20px;
+        position: relative;
+        top: 0;
+    }
+    
+    .main-content {
+        padding: 20px 15px;
+    }
+    
+    .card-stats {
+        margin-bottom: 15px;
+    }
+    
+    .card-stats .number {
+        font-size: 1.6rem;
+    }
+}
