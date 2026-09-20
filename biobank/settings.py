@@ -5,9 +5,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-@&_+$%^&*()_+abcdefghijklmnopqrstuvwxyz123456789'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','btrcbiobank.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://btrcbiobank.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,9 +20,8 @@ INSTALLED_APPS = [
        'django.contrib.sites',
     'rest_framework',
     'corsheaders',
-    'axes',  # <-- أضف هذا السطر
-       'allauth',
-    'allauth.account',
+
+   
     'allauth.socialaccount',
     'apps.users.apps.UsersConfig',
     'apps.participants.apps.ParticipantsConfig',
@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'apps.reports.apps.ReportsConfig',
     'apps.custom_forms.apps.CustomFormsConfig',
     'apps.dashboard.apps.DashboardConfig',
+'mmpi2',
+
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ أضف هذا
+
 ]
 
 ROOT_URLCONF = 'biobank.urls'
@@ -91,7 +95,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
